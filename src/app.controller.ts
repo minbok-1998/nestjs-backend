@@ -15,7 +15,7 @@ import {
 import { AppService } from './app.service';
 import { UpdateUserDto } from 'dto/UpdateUser.dto';
 import { version } from 'os';
-import { CreateUserDto } from 'dto/CreateUserDto';
+import { CreateUserDto } from '../dto/CreateUserDto';
 
 @Controller()
 export class AppController {
@@ -82,5 +82,6 @@ export class AppController {
     const { name, email } = createUserDto;
 
     return `유저를 생성했습니다. 이름 ${name}, 이메일 ${email}`;
+    // 유저를 생성했습니다. 이름 minbok, 이메일 minbok@mail.com
   }
 }
