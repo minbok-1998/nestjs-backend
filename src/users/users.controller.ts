@@ -1,15 +1,19 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { UserInfo } from 'os';
-import { CreateUserDto, VerifyEmailDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { VerifyEmailDto } from './dto/verify-email.dto';
+import { UserLoginDto } from './dto/user-login.dto';
+import { UsersService } from './users.service';
 // import { UserInfo } from './UserInfo';
 
 @Controller('/users')
 export class UsersController {
+  constructor(private UsersService: UsersService) {}
   // 회원가입
   // ts : void는 결과 값을 반환하지 않는 함수에 설정
   @Post()
   async createUser(@Body() dto: CreateUserDto): Promise<void> {
-    console.log(dto);
+    const { name, email, password } = dto;
+    await this.UsersService.createUser(name, email, password);
   }
 
   //   이메일 검증
@@ -21,7 +25,7 @@ export class UsersController {
 
   //   로그인
   @Post('/login')
-  async login(@Body() dto: VerifyEmailDto): Promise<string> {
+  async login(@Body() dto: UserLoginDto): Promise<string> {
     console.log(dto);
     return;
   }
