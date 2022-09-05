@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   SetMetadata,
