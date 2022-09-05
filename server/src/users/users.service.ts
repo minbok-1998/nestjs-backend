@@ -41,6 +41,7 @@ export class UsersService {
     private readonly customerRepository: Repository<CUSTOMER>,
   ) {}
 
+  // 고객 정보 불러오기
   async getAllUsers(): Promise<CUSTOMER[]> {
     const result = await this.customerRepository
       .createQueryBuilder('user')
@@ -48,14 +49,8 @@ export class UsersService {
       .getMany(); // select * from customer
 
     try {
-      console.log('데이터 불러오기 성공!');
-      // console.log(typeof result);
-      // console.log(Array.isArray(result));
-      // console.log(result.length);
-      // throw new Error('err');
       return result;
     } catch (error) {
-      console.log('에러발생!');
       throw new HttpException(
         {
           status: HttpStatus.FORBIDDEN,
@@ -66,10 +61,13 @@ export class UsersService {
     }
   }
 
-  // getHello(): string {
-  //   return '안녕!!!!!!';
-  // }
-}
-function isDeleted(isDeleted: any) {
-  throw new Error('Function not implemented.');
+  // 고객 정보 추가하기
+  async addCustomer(): Promise<any> {
+    const result = await this.customerRepository.create({
+      name: 'minbok',
+      birthday: '980810',
+      gender: 'woman',
+      job: 'student',
+    });
+  }
 }

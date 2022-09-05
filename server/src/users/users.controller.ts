@@ -1,16 +1,6 @@
-import {
-  Controller,
-  Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-  SetMetadata,
-} from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UserLoginDto } from './dto/user-login.dto';
 import { UsersService } from './users.service';
-import { request } from 'http';
 import { CUSTOMER } from './user.entity';
 
 @Controller('/user')
@@ -22,10 +12,9 @@ export class UsersController {
     return this.UsersService.getAllUsers();
   }
 
-  @Get()
-  async getUser(): Promise<string> {
-    // return this.UsersService.getHello();
-    return '여기는 유저 라우터';
+  @Post('/list')
+  addCustomer(): Promise<any> {
+    return this.UsersService.addCustomer();
   }
 
   // @Get()
