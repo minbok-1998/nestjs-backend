@@ -42,13 +42,16 @@ export class UsersService {
   ) {}
 
   async getAllUsers(): Promise<CUSTOMER[]> {
-    const result = await this.customerRepository.find(); // select * from customer
+    const result = await this.customerRepository
+      .createQueryBuilder('user')
+      .where('isDeleted = 0')
+      .getMany(); // select * from customer
 
     try {
       console.log('데이터 불러오기 성공!');
-      console.log(typeof result);
-      console.log(Array.isArray(result));
-      console.log(result.length);
+      // console.log(typeof result);
+      // console.log(Array.isArray(result));
+      // console.log(result.length);
       // throw new Error('err');
       return result;
     } catch (error) {
@@ -66,4 +69,7 @@ export class UsersService {
   // getHello(): string {
   //   return '안녕!!!!!!';
   // }
+}
+function isDeleted(isDeleted: any) {
+  throw new Error('Function not implemented.');
 }
