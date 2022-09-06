@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Req } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
@@ -62,12 +62,19 @@ export class UsersService {
   }
 
   // 고객 정보 추가하기
-  async addCustomer(): Promise<any> {
-    const result = await this.customerRepository.create({
-      name: 'minbok',
-      birthday: '980810',
-      gender: 'woman',
-      job: 'student',
-    });
+  async addCustomer(customer: CUSTOMER): Promise<void> {
+    await this.customerRepository.save(customer);
+
+    // try {
+    //   return result;
+    // } catch (error) {
+    //   throw new HttpException(
+    //     {
+    //       status: HttpStatus.FORBIDDEN,
+    //       error: '회원가입 과정에서 에러가 발생했습니다!',
+    //     },
+    //     HttpStatus.FORBIDDEN,
+    //   );
+    // }
   }
 }

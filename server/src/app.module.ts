@@ -6,6 +6,8 @@ import { UserModule } from './users/user.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { CUSTOMER } from './users/user.entity';
+import { SignupModule } from './signup/signup.module';
+import { NEWSIGNUP } from './signup/signup.entity';
 
 @Module({
   imports: [
@@ -16,11 +18,12 @@ import { CUSTOMER } from './users/user.entity';
       username: 'root',
       password: '0527',
       database: 'management',
-      entities: [CUSTOMER],
+      entities: [CUSTOMER, NEWSIGNUP],
       // synchronize: true,
       migrationsRun: true,
     }),
     UserModule,
+    SignupModule,
   ],
   controllers: [AppController],
   providers: [AppService],

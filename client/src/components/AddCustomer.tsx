@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 export default function AddCustomer() {
   const [name, setName] = useState("");
-  const [birth, setBirth] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [gender, setGender] = useState("");
   const [job, setJob] = useState("");
 
@@ -12,7 +12,7 @@ export default function AddCustomer() {
   };
 
   const hadleChangeBirth = (e: any) => {
-    setBirth(e.target.value);
+    setBirthday(e.target.value);
   };
 
   const hadleChangeGender = (e: any) => {
@@ -23,7 +23,30 @@ export default function AddCustomer() {
     setJob(e.target.value);
   };
 
-  axios.post("");
+  const url = "/user/list";
+
+  const submit = () => {
+    const date = new Date()
+      .toLocaleString()
+      .replaceAll(". ", "-")
+      .replace("-오후", "");
+
+    axios
+      .post(url, {
+        name: name,
+        birthday: birthday,
+        gender: gender,
+        job: job,
+        createData: date,
+        isDeleted: 0,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="input-group mb-3">
@@ -41,7 +64,7 @@ export default function AddCustomer() {
         className="form-control"
         placeholder="생년월일"
         aria-label="birth"
-        value={birth}
+        value={birthday}
         onChange={hadleChangeBirth}
         // aria-describedby="basic-addon2"
       />
@@ -68,6 +91,7 @@ export default function AddCustomer() {
         className="btn btn-primary btn-sm"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
+        onClick={submit}
       >
         고객 정보 추가
       </button>

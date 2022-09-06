@@ -5,8 +5,8 @@ export class CUSTOMER {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true, nullable: false })
-  image: string;
+  // @Column({ unique: true, nullable: false })
+  // image: string;
 
   @Column({ nullable: false })
   name: string;
@@ -23,6 +23,6 @@ export class CUSTOMER {
   @Column()
   createData: string;
 
-  @Column()
+  @Column({ nullable: false })
   isDeleted: number;
 }

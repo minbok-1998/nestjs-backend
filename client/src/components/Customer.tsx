@@ -7,7 +7,7 @@ export default function Customer(): JSX.Element {
   const [customer, setCustomer] = useState<any[]>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/list")
+      .get("/user/list")
       .then((res) => {
         setCustomer(res.data);
       })
@@ -38,7 +38,7 @@ export default function Customer(): JSX.Element {
                   key={data.id}
                   id={data.id}
                   name={data.name}
-                  birth={data.birthday}
+                  birthday={data.birthday}
                   gender={data.gender}
                   job={data.job}
                 />

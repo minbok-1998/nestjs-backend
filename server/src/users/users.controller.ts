@@ -1,20 +1,37 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  RawBodyRequest,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { CUSTOMER } from './user.entity';
+import { FastifyBodyParser, FastifyRequest } from 'fastify';
 
 @Controller('/user')
 export class UsersController {
   constructor(private UsersService: UsersService) {}
 
   @Get('/list')
-  getAllUsers(): Promise<CUSTOMER[]> {
-    return this.UsersService.getAllUsers();
+  async getAllUsers(): Promise<CUSTOMER[]> {
+    return await this.UsersService.getAllUsers();
   }
 
   @Post('/list')
-  addCustomer(): Promise<any> {
-    return this.UsersService.addCustomer();
+  async addCustomer(@Body() customer: CUSTOMER): Promise<string> {
+    await this.UsersService.addCustomer(customer);
+
+    return Object.assign({
+      data: { ...customer },
+      statusCode: 201,
+      statusMsg: '저장 성공',
+    });
   }
 
   // @Get()
