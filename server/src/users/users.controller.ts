@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -32,6 +33,11 @@ export class UsersController {
       statusCode: 201,
       statusMsg: '저장 성공',
     });
+  }
+
+  @Delete(':id')
+  async delCustomer(@Param('id') id: string): Promise<any> {
+    await this.UsersService.delCustomer(id.replace('list', ''));
   }
 
   // @Get()

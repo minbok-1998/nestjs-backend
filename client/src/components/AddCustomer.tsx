@@ -42,6 +42,7 @@ export default function AddCustomer() {
       })
       .then((res) => {
         console.log(res);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);

@@ -1,5 +1,7 @@
 import React from "react";
-interface userProps {
+import DeleteCustomer from "./DeleteCustomer";
+
+interface Props {
   id: string;
   name: string;
   birthday: string;
@@ -7,7 +9,7 @@ interface userProps {
   job: string;
 }
 
-export default function CustomerTable(props: userProps) {
+export default function CustomerTable(props: Props) {
   return (
     <>
       <tr>
@@ -16,6 +18,9 @@ export default function CustomerTable(props: userProps) {
         <td>{props.birthday}</td>
         <td>{props.gender}</td>
         <td>{props.job}</td>
+        <td>
+          <DeleteCustomer id={props.id} />
+        </td>
       </tr>
     </>
   );

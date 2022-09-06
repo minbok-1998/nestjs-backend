@@ -27,8 +27,6 @@ export default function Customer(): JSX.Element {
               <th scope="col">생년월일</th>
               <th scope="col">성별</th>
               <th scope="col">직업</th>
-              <th scope="col">직업</th>
-              <th scope="col">직업</th>
             </tr>
           </thead>
           <tbody className="table-group-divider">

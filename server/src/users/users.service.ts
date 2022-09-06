@@ -13,18 +13,6 @@ import {
 
 import { CUSTOMER } from './user.entity';
 
-// router.get("/:id", async (req, res) => {
-//   let sql = "SELECT * FROM CUSTOMER WHERE id = ?";
-//   const params = [req.params.id];
-
-//   try {
-//     const result = await connection.query(sql, params);
-//     res.send(result);
-//   } catch (err) {
-//     res.send(err);
-//   }
-// });
-
 // const _get = async (url) => {
 //   try {
 //     const result = await axios.get(url, config);
@@ -62,19 +50,24 @@ export class UsersService {
   }
 
   // 고객 정보 추가하기
-  async addCustomer(customer: CUSTOMER): Promise<void> {
-    await this.customerRepository.save(customer);
+  async addCustomer(customer: CUSTOMER): Promise<CUSTOMER> {
+    const result = await this.customerRepository.save(customer);
 
-    // try {
-    //   return result;
-    // } catch (error) {
-    //   throw new HttpException(
-    //     {
-    //       status: HttpStatus.FORBIDDEN,
-    //       error: '회원가입 과정에서 에러가 발생했습니다!',
-    //     },
-    //     HttpStatus.FORBIDDEN,
-    //   );
-    // }
+    try {
+      return result;
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: '회원가입 과정에서 에러가 발생했습니다!',
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
+  }
+
+  // 고객 정보 삭제
+  async delCustomer(id: string): Promise<void> {
+    await this.customerRepository.delete(id);
   }
 }
