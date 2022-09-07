@@ -23,30 +23,27 @@ export default function AddCustomer() {
     setJob(e.target.value);
   };
 
+  const refresh = () => {
+    setName("");
+    setBirthday("");
+    setGender("");
+    setJob("");
+  };
+
   const url = "/user/list";
 
-  const submit = () => {
-    const date = new Date()
-      .toLocaleString()
-      .replaceAll(". ", "-")
-      .replace("-오후", "");
-
-    axios
-      .post(url, {
+  const submit = async () => {
+    try {
+      await axios.post(url, {
         name: name,
         birthday: birthday,
         gender: gender,
         job: job,
-        createData: date,
-        isDeleted: 0,
-      })
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
       });
+      refresh();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -58,7 +55,6 @@ export default function AddCustomer() {
         aria-label="name"
         value={name}
         onChange={hadleChangeName}
-        // aria-describedby="basic-addon2"
       />
       <input
         type="text"
@@ -67,7 +63,6 @@ export default function AddCustomer() {
         aria-label="birth"
         value={birthday}
         onChange={hadleChangeBirth}
-        // aria-describedby="basic-addon2"
       />
       <input
         type="text"
@@ -76,7 +71,6 @@ export default function AddCustomer() {
         aria-label="gender"
         value={gender}
         onChange={hadleChangeGender}
-        // aria-describedby="basic-addon2"
       />
       <input
         type="text"
@@ -85,7 +79,6 @@ export default function AddCustomer() {
         aria-label="job"
         value={job}
         onChange={hadleChangeJob}
-        // aria-describedby="basic-addon2"
       />
       <button
         type="button"

@@ -5,16 +5,20 @@ import AddCustomer from "./AddCustomer";
 
 export default function Customer(): JSX.Element {
   const [customer, setCustomer] = useState<any[]>([]);
+
+  const getUserList = async () => {
+    try {
+      const data = await axios.get("/user/list").then((res) => res.data);
+      setCustomer(data);
+      // setCustomer(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get("/user/list")
-      .then((res) => {
-        setCustomer(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    getUserList();
+  }, [customer]);
 
   return (
     <div className="d-flex p-2 flex-column">

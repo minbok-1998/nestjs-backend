@@ -1,15 +1,7 @@
 import { Injectable, Req } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import {
-  Controller,
-  Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-  SetMetadata,
-} from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 import { CUSTOMER } from './user.entity';
 
@@ -30,13 +22,12 @@ export class UsersService {
   ) {}
 
   // 고객 정보 불러오기
-  async getAllUsers(): Promise<CUSTOMER[]> {
-    const result = await this.customerRepository
-      .createQueryBuilder('user')
-      .where('isDeleted = 0')
-      .getMany(); // select * from customer
-
+  async getAllUsers(): Promise<any> {
     try {
+      const result = await this.customerRepository
+        .createQueryBuilder('user')
+        .where('isDelete = 1')
+        .getMany();
       return result;
     } catch (error) {
       throw new HttpException(
@@ -51,9 +42,8 @@ export class UsersService {
 
   // 고객 정보 추가하기
   async addCustomer(customer: CUSTOMER): Promise<CUSTOMER> {
-    const result = await this.customerRepository.save(customer);
-
     try {
+      const result = await this.customerRepository.save(customer);
       return result;
     } catch (error) {
       throw new HttpException(
@@ -67,7 +57,14 @@ export class UsersService {
   }
 
   // 고객 정보 삭제
-  async delCustomer(id: string): Promise<void> {
-    await this.customerRepository.delete(id);
+  async delCustomer(id: string): Promise<any> {
+    try {
+      const result = await this.customerRepository.delete(id);
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+    // DeleteResult { raw: [], affected: 1 }
+    // console.log(await (await this.customerRepository.delete(id)).affected);
   }
 }

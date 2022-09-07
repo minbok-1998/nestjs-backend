@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
 @Entity()
-export class CUSTOMER {
+export class CUSTOMER extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,5 +24,5 @@ export class CUSTOMER {
   createData: string;
 
   @Column({ nullable: false })
-  isDeleted: number;
+  isDelete: number;
 }

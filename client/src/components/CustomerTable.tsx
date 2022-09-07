@@ -19,6 +19,9 @@ export default function CustomerTable(props: Props) {
         <td>{props.gender}</td>
         <td>{props.job}</td>
         <td>
+          
+        </td>
+        <td>
           <DeleteCustomer id={props.id} />
         </td>
       </tr>

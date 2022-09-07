@@ -8,15 +8,11 @@ export default function DeleteCustomer(props: Props): JSX.Element {
   const url = "/user/list" + props.id;
 
   const deleteCustomer = async () => {
-    await axios
-      .delete(url)
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await axios.delete(url);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -25,14 +25,8 @@ export class UsersController {
   }
 
   @Post('/list')
-  async addCustomer(@Body() customer: CUSTOMER): Promise<string> {
-    await this.UsersService.addCustomer(customer);
-
-    return Object.assign({
-      data: { ...customer },
-      statusCode: 201,
-      statusMsg: '저장 성공',
-    });
+  async addCustomer(@Body() customer: CUSTOMER): Promise<CUSTOMER> {
+    return await this.UsersService.addCustomer(customer);
   }
 
   @Delete(':id')

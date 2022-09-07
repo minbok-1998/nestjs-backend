@@ -4,8 +4,8 @@ import React, { useState } from "react";
 export default function Signup(): JSX.Element {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
-  const [pwCheck, setPwCheck] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
 
   const hadleNameValue = (e: any) => {
     setName(e.target.value);
@@ -16,26 +16,26 @@ export default function Signup(): JSX.Element {
   };
 
   const hadlePwValue = (e: any) => {
-    setPw(e.target.value);
+    setPassword(e.target.value);
   };
 
   const hadlePwCheckValue = (e: any) => {
-    setPwCheck(e.target.value);
+    setPasswordCheck(e.target.value);
   };
 
   const hadleSubmit = (e: any) => {
     e.preventDefault();
     setName("");
     setEmail("");
-    setPw("");
-    setPwCheck("");
+    setPassword("");
+    setPasswordCheck("");
   };
 
   const val = {
     name,
     email,
-    pw,
-    pwCheck,
+    password,
+    passwordCheck,
   };
 
   //   const signup = async () => {
@@ -81,7 +81,7 @@ export default function Signup(): JSX.Element {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
-            value={pw}
+            value={password}
             onChange={hadlePwValue}
           />
         </div>
@@ -93,7 +93,7 @@ export default function Signup(): JSX.Element {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
-            value={pwCheck}
+            value={passwordCheck}
             onChange={hadlePwCheckValue}
           />
         </div>
