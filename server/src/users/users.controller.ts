@@ -1,19 +1,6 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Query,
-  RawBodyRequest,
-  Req,
-  Res,
-} from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CUSTOMER } from './user.entity';
-import { FastifyBodyParser, FastifyRequest } from 'fastify';
 
 @Controller('/user')
 export class UsersController {
@@ -29,9 +16,13 @@ export class UsersController {
     return await this.UsersService.addCustomer(customer);
   }
 
-  @Delete(':id')
+  @Post(':id')
   async delCustomer(@Param('id') id: string): Promise<any> {
-    await this.UsersService.delCustomer(id.replace('list', ''));
+    const test = await this.UsersService.delCustomer(id.replace('list', ''));
+    // console.log('test');
+    // console.log(test.isDelete);
+
+    return (test.isDelete = -1);
   }
 
   // @Get()

@@ -30,6 +30,7 @@
     "@nestjs/typeorm": "^9.0.1",
     "@types/sequelize": "^4.28.14",
     "fastify": "^4.5.3",
+    "hbs": "^4.2.0",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.8",
     "reflect-metadata": "^0.1.13",

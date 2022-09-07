@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteCustomer from "./DeleteCustomer";
+import UpdateCustomer from "./UpdateCustomer";
 
 interface Props {
   id: string;
@@ -19,7 +20,7 @@ export default function CustomerTable(props: Props) {
         <td>{props.gender}</td>
         <td>{props.job}</td>
         <td>
-          
+          <UpdateCustomer />
         </td>
         <td>
           <DeleteCustomer id={props.id} />

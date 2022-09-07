@@ -19,8 +19,8 @@ import { NEWSIGNUP } from './signup/signup.entity';
       password: '0527',
       database: 'management',
       entities: [CUSTOMER, NEWSIGNUP],
-      // synchronize: true,
-      migrationsRun: true,
+      // synchronize: false, // true로 설정 시 데이터 손실 위험 있음
+      migrationsRun: true, //  데이터베이스의 변경점을 소스 코드로 관리할 수 있음
     }),
     UserModule,
     SignupModule,

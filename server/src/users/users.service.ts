@@ -5,15 +5,6 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 
 import { CUSTOMER } from './user.entity';
 
-// const _get = async (url) => {
-//   try {
-//     const result = await axios.get(url, config);
-//     return result.data;
-//   } catch (err) {
-//     throwError(err);
-//   }
-// };
-
 @Injectable()
 export class UsersService {
   constructor(
@@ -25,9 +16,10 @@ export class UsersService {
   async getAllUsers(): Promise<any> {
     try {
       const result = await this.customerRepository
-        .createQueryBuilder('user')
+        .createQueryBuilder()
         .where('isDelete = 1')
         .getMany();
+
       return result;
     } catch (error) {
       throw new HttpException(
@@ -57,14 +49,18 @@ export class UsersService {
   }
 
   // 고객 정보 삭제
-  async delCustomer(id: string): Promise<any> {
+  async delCustomer(id: any): Promise<any> {
     try {
-      const result = await this.customerRepository.delete(id);
+      const result = await this.customerRepository
+        .createQueryBuilder()
+        .update(CUSTOMER)
+        .set({ isDelete: -1 })
+        .where(`id = ${id}`)
+        .execute();
+
       return result;
     } catch (error) {
       console.log(error);
     }
-    // DeleteResult { raw: [], affected: 1 }
-    // console.log(await (await this.customerRepository.delete(id)).affected);
   }
 }
