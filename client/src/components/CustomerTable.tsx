@@ -20,7 +20,13 @@ export default function CustomerTable(props: Props) {
         <td>{props.gender}</td>
         <td>{props.job}</td>
         <td>
-          <UpdateCustomer />
+          <UpdateCustomer
+            id={props.id}
+            name={props.name}
+            birthday={props.birthday}
+            gender={props.gender}
+            job={props.job}
+          />
         </td>
         <td>
           <DeleteCustomer id={props.id} />

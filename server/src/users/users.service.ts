@@ -48,8 +48,26 @@ export class UsersService {
     }
   }
 
+  // 고객 정보 수정
+  async updateCustomer(id: number): Promise<any> {
+    try {
+      const result = await this.customerRepository.find();
+      console.log('result');
+      console.log(result);
+      // .createQueryBuilder()
+      // .update(CUSTOMER)
+      // .set({ name: '이름', birthday: '8789', gender: '여자', job: '대학생' })
+      // .where(`id = ${id}`)
+      // .execute();
+
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // 고객 정보 삭제
-  async delCustomer(id: any): Promise<any> {
+  async delCustomer(id: number): Promise<any> {
     try {
       const result = await this.customerRepository
         .createQueryBuilder()

@@ -80,13 +80,7 @@ export default function AddCustomer() {
         value={job}
         onChange={hadleChangeJob}
       />
-      <button
-        type="button"
-        className="btn btn-primary btn-sm"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        onClick={submit}
-      >
+      <button type="button" className="btn btn-primary btn-sm" onClick={submit}>
         고객 정보 추가
       </button>
     </div>

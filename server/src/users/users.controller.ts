@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Render,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CUSTOMER } from './user.entity';
 
@@ -6,23 +15,35 @@ import { CUSTOMER } from './user.entity';
 export class UsersController {
   constructor(private UsersService: UsersService) {}
 
+  // @Get('/list')
+  // async getAllUsers(): Promise<CUSTOMER[]> {
+  //   return await this.UsersService.getAllUsers();
+  // }
+
   @Get('/list')
-  async getAllUsers(): Promise<CUSTOMER[]> {
-    return await this.UsersService.getAllUsers();
+  @Render('component')
+  async root() {
+    const result = await this.UsersService.getAllUsers();
+    return { customer: result };
   }
 
+  // 고객 정보 추가
   @Post('/list')
   async addCustomer(@Body() customer: CUSTOMER): Promise<CUSTOMER> {
     return await this.UsersService.addCustomer(customer);
   }
 
-  @Post(':id')
-  async delCustomer(@Param('id') id: string): Promise<any> {
-    const test = await this.UsersService.delCustomer(id.replace('list', ''));
-    // console.log('test');
-    // console.log(test.isDelete);
+  // 고객 정보 수정
+  @Put(':id')
+  async updateCustomer(@Param('id') id: any): Promise<any> {
+    console.log(id.replace('list', ''));
+    return await this.updateCustomer(id);
+  }
 
-    return (test.isDelete = -1);
+  // 고객 정보 삭제
+  @Delete(':id')
+  async delCustomer(@Param('id') id: any): Promise<any> {
+    return await this.UsersService.delCustomer(id.replace('list', ''));
   }
 
   // @Get()

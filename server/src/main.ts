@@ -4,6 +4,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
+import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,8 +14,18 @@ async function bootstrap() {
       rawBody: true,
     },
   );
+  app.useStaticAssets({
+    root: join(__dirname, '..', '..', 'public'),
+    prefix: '/public/',
+  });
 
-  console.log(`listening`);
+  app.setViewEngine({
+    engine: {
+      pug: require('pug'),
+    },
+    templates: join(__dirname, '..', '..', 'views'),
+  });
+
   await app.listen(5000);
 }
 bootstrap();

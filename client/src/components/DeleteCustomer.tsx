@@ -9,7 +9,7 @@ export default function DeleteCustomer(props: Props): JSX.Element {
 
   const deleteCustomer = async () => {
     try {
-      await axios.post(url);
+      await axios.delete(url);
     } catch (error) {
       console.log(error);
     }
