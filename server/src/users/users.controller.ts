@@ -42,8 +42,7 @@ export class UsersController {
   }
 
   // 고객 정보 삭제
-  @Delete(':id')
-  @Render('index')
+  @Delete('/list/:id')
   async deleteCustomer(@Param('id') id: any): Promise<any> {
     const result = await this.UsersService.delCustomer(id.replace('list', ''));
     return { customer: result };
