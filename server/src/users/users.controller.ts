@@ -21,7 +21,7 @@ export class UsersController {
   // }
 
   @Get('/list')
-  @Render('component')
+  @Render('index')
   async root() {
     const result = await this.UsersService.getAllUsers();
     return { customer: result };

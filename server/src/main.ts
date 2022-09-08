@@ -21,7 +21,7 @@ async function bootstrap() {
 
   app.setViewEngine({
     engine: {
-      pug: require('pug'),
+      ejs: require('ejs'),
     },
     templates: join(__dirname, '..', '..', 'views'),
   });
