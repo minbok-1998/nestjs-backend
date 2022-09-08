@@ -20,9 +20,10 @@ export class UsersController {
   //   return await this.UsersService.getAllUsers();
   // }
 
+  // 고객 목록 불러오기
   @Get('/list')
   @Render('index')
-  async root() {
+  async getCustomer() {
     const result = await this.UsersService.getAllUsers();
     return { customer: result };
   }
@@ -42,9 +43,15 @@ export class UsersController {
 
   // 고객 정보 삭제
   @Delete(':id')
-  async delCustomer(@Param('id') id: any): Promise<any> {
-    return await this.UsersService.delCustomer(id.replace('list', ''));
+  @Render('index')
+  async deleteCustomer(@Param('id') id: any): Promise<any> {
+    const result = await this.UsersService.delCustomer(id.replace('list', ''));
+    return { customer: result };
   }
+  // @Delete(':id')
+  // async delCustomer(@Param('id') id: any): Promise<any> {
+  //   return await this.UsersService.delCustomer(id.replace('list', ''));
+  // }
 
   // @Get()
   // async test(): Promise<string> {
