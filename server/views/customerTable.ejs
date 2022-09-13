@@ -53,6 +53,37 @@
     </table>
 
     <script>
+      const val = {
+        name: '342',
+        birthday: 'dsfsf',
+        gender: 'dfsf',
+        job: 'dsfsd',
+      };
+
+      function handleUserUpdate(id, val) {
+        console.log(id);
+        console.log(val);
+        $.ajax({
+          type: 'PUT',
+          url: `http://localhost:5000/user/list/${id}`,
+          data: {
+            name: '342',
+            birthday: 'dsfsf',
+            gender: 'dfsf',
+            job: 'dsfsd',
+          },
+          success: function (data) {
+            console.log('success');
+            console.log(data);
+            // window.location.reload();
+          },
+          error: function (err) {
+            console.log('error');
+            console.log(err);
+          },
+        });
+      }
+
       function handleUserDelete(id) {
         $.ajax({
           type: 'DELETE',

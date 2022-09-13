@@ -10,15 +10,11 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CUSTOMER } from './user.entity';
+import { CreateUserDto } from './dto/user.dto';
 
 @Controller('/user')
 export class UsersController {
   constructor(private UsersService: UsersService) {}
-
-  // @Get('/list')
-  // async getAllUsers(): Promise<CUSTOMER[]> {
-  //   return await this.UsersService.getAllUsers();
-  // }
 
   // 고객 목록 불러오기
   @Get('/list')
@@ -30,54 +26,27 @@ export class UsersController {
 
   // 고객 정보 추가
   @Post('/list')
-  async addCustomer(@Body() customer: CUSTOMER): Promise<CUSTOMER> {
-    return await this.UsersService.addCustomer(customer);
+  async addCustomer(@Body() customer: CUSTOMER): Promise<CreateUserDto> {
+    const result = await this.UsersService.addCustomer(customer);
+    return result;
   }
 
   // 고객 정보 수정
-  @Put(':id')
-  async updateCustomer(@Param('id') id: any): Promise<any> {
-    console.log(id.replace('list', ''));
-    return await this.updateCustomer(id);
+  @Put('/list/:id')
+  async updateCustomer(
+    @Param('id') id: number,
+    @Body() val: any,
+  ): Promise<any> {
+    console.log(id);
+    const result = await this.UsersService.updateCustomer(id, val);
+    return result;
   }
 
   // 고객 정보 삭제
   @Delete('/list/:id')
-  async deleteCustomer(@Param('id') id: any): Promise<any> {
-    const result = await this.UsersService.delCustomer(id.replace('list', ''));
-    return { customer: result };
+  async deleteCustomer(@Param('id') id: number): Promise<object> {
+    const result = await this.UsersService.delCustomer(id);
+
+    return result;
   }
-  // @Delete(':id')
-  // async delCustomer(@Param('id') id: any): Promise<any> {
-  //   return await this.UsersService.delCustomer(id.replace('list', ''));
-  // }
-
-  // @Get()
-  // async test(): Promise<string> {
-  //   throw new HttpException(
-  //     {
-  //       statusCode: 404,
-  //       message: '에러발생!! 404',
-  //     },
-  //     403,
-  //   );
-  // }
-
-  // @Get(':id')
-  // async bingPipes(@Param('id', ParseIntPipe) id: number): Promise<string> {
-  //   return `id ${id}`;
-  // }
-
-  //   custom pipes
-  //   @Get(':id')
-  //   async bingPipes(@Param('id', ValidationPipe) id: number): Promise<string> {
-  //     return `id ${id}`;
-  //   }
-
-  // @SetMetadata()
-  // @SetMetadata('test', ['minbok'])
-  // @Get('/addmeta')
-  // async addmetadata() {
-  //   return 'ff';
-  // }
 }

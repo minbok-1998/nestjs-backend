@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 import { CUSTOMER } from './user.entity';
+import { CreateUserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -33,7 +34,9 @@ export class UsersService {
   }
 
   // 고객 정보 추가하기
-  async addCustomer(customer: CUSTOMER): Promise<CUSTOMER> {
+  async addCustomer(customer: CreateUserDto): Promise<CreateUserDto> {
+    // console.log('customer');
+    // console.log(customer);
     try {
       const result = await this.customerRepository.save(customer);
       return result;
@@ -41,7 +44,7 @@ export class UsersService {
       throw new HttpException(
         {
           status: HttpStatus.FORBIDDEN,
-          error: '회원가입 과정에서 에러가 발생했습니다!',
+          error: '고객 정보 추가과정에서 에러가 발생했습니다!',
         },
         HttpStatus.FORBIDDEN,
       );
@@ -49,16 +52,19 @@ export class UsersService {
   }
 
   // 고객 정보 수정
-  async updateCustomer(id: number): Promise<any> {
+  async updateCustomer(id: number, val: object): Promise<any> {
     try {
-      const result = await this.customerRepository.find();
+      const result = await this.customerRepository
+        .createQueryBuilder()
+        .update(CUSTOMER)
+        .set(val)
+        .where(`id = ${id}`)
+        .execute();
+
       console.log('result');
       console.log(result);
-      // .createQueryBuilder()
-      // .update(CUSTOMER)
-      // .set({ name: '이름', birthday: '8789', gender: '여자', job: '대학생' })
-      // .where(`id = ${id}`)
-      // .execute();
+
+      console.log(val);
 
       return result;
     } catch (error) {
@@ -75,6 +81,9 @@ export class UsersService {
         .set({ isDelete: -1 })
         .where(`id = ${id}`)
         .execute();
+
+      console.log('result');
+      console.log(result);
 
       return result;
     } catch (error) {

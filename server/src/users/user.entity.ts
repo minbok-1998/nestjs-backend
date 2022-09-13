@@ -11,16 +11,16 @@ export class CUSTOMER extends BaseEntity {
   @Column({ nullable: false })
   name: string;
 
-  @Column()
+  @Column({ nullable: false })
   birthday: string;
 
-  @Column()
+  @Column({ nullable: false })
   gender: string;
 
-  @Column()
+  @Column({ nullable: false })
   job: string;
 
-  @Column()
+  @Column({ nullable: false })
   createData: string;
 
   @Column({ nullable: false })
