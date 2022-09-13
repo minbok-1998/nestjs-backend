@@ -12,9 +12,30 @@
     />
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <title>ejs 연습</title>
+    <style>
+      #container {
+        width: 100vw;
+        display: flex;
+      }
+
+      #nav {
+        position: fixed;
+      }
+
+      #main {
+        width: 100%;
+        padding-left: 200px;
+        flex-direction: column;
+      }
+    </style>
   </head>
   <body>
-    <%-include('header.ejs')%> <%-include('customerTable.ejs')%>
-    <%-include('footer.ejs')%>
+    <div id="container">
+      <div id="nav"><%-include('sideNav.ejs')%></div>
+
+      <div id="main">
+        <%-include('header.ejs')%> <%-include('customerTable.ejs')%>
+      </div>
+    </div>
   </body>
 </html>
