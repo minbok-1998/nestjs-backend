@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <!-- <style>
+  <style>
     table {
-      position: absolute;
+      margin-left: 20px;
     }
-  </style> -->
+  </style>
   <body>
     <table class="table table-hover">
       <thead>
@@ -59,13 +59,12 @@
           url: `http://localhost:5000/user/list/${id}`,
           success: function (data) {
             console.log(data);
+            window.location.reload();
           },
           error: function (err) {
             console.log(err);
           },
         });
-
-        window.location.reload();
       }
     </script>
   </body>
