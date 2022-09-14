@@ -6,20 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
       main {
         display: flex;
         justify-content: center;
@@ -41,72 +27,90 @@
   </head>
   <body class="text-center">
     <main class="form-signin">
-      <form>
-        <h1 class="h3 mb-3 fw-normal">회원가입</h1>
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
-          <label for="floatingInput">이름</label>
-        </div>
-
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
-          <label for="floatingInput">이메일</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-          />
-          <label for="floatingPassword">비밀번호</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-          />
-          <label for="floatingPassword">비밀번호 확인</label>
-        </div>
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> 회원정보 기억
-          </label>
-        </div>
+      <!-- <h1>회원가입</h1> -->
+      <div id="inputWrap" class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="이름"
+          onchange="onchangeName()"
+        />
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="이메일"
+          onchange="onchangeEmail()"
+        />
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="비밀번호"
+          onchange="onchangePassword()"
+        />
+        <input
+          type="password"
+          class="form-control"
+          id="passwordCheck"
+          placeholder="비밀번호 확인"
+          onchange="onchangePasswordCheck()"
+        />
         <button
           onclick="handleSignUp()"
-          class="w-100 btn btn-lg btn-primary"
-          type="submit"
+          id="addBtn"
+          type="button"
+          class="btn btn-warning"
         >
           회원가입
         </button>
-        <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
-      </form>
+      </div>
     </main>
 
     <script>
+      let nameValue;
+      let emailValue;
+      let passwordValue;
+      let passwordCheckValue;
+
+      function onchangeName() {
+        nameValue = $('#name').val();
+      }
+
+      function onchangeEmail() {
+        emailValue = $('#email').val();
+      }
+
+      function onchangePassword() {
+        passwordValue = $('#password').val();
+      }
+
+      function onchangePasswordCheck() {
+        passwordCheckValue = $('#passwordCheck').val();
+      }
+
       function handleSignUp() {
+        const val = {
+          name: nameValue,
+          email: emailValue,
+          password: passwordValue,
+          passwordCheck: passwordCheckValue,
+        };
+
+        // console.log('val');
+        // console.log(val);
+
         $.ajax({
           type: 'POST',
           url: `http://localhost:5000/signup`,
+          data: val,
           success: function (data) {
             console.log(data);
-            // window.location.reload();
+            window.location.reload();
           },
           error: function (err) {
+            console.log('실패!');
             console.log(err);
           },
         });

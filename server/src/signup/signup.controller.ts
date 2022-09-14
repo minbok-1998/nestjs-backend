@@ -4,11 +4,15 @@ import { SignUpDto } from './dto/signup.dto';
 
 @Controller('/signup')
 export class SignupController {
-  constructor(private signupService: SignupService) {}
+  constructor(private SignupService: SignupService) {}
 
   @Post()
-  addCustomer(@Body() data: any): Promise<any> {
-    console.log(data);
-    return this.signupService.signUp(data);
+  async signup(@Body() signupData: SignUpDto): Promise<void> {
+    // console.log('controller');
+    // console.log(SignupData);
+    const result = await this.SignupService.signUp(signupData);
+    console.log('cont-result');
+    console.log(result);
+    // return result;
   }
 }

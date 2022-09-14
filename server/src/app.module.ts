@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { CUSTOMER } from './users/user.entity';
 import { SignupModule } from './signup/signup.module';
-import { NEWSIGNUP } from './signup/signup.entity';
+import { SIGNUP } from './signup/signup.entity';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { NEWSIGNUP } from './signup/signup.entity';
       username: 'root',
       password: '0527',
       database: 'management',
-      entities: [CUSTOMER, NEWSIGNUP],
+      entities: [CUSTOMER, SIGNUP],
       // synchronize: false, // true로 설정 시 데이터 손실 위험 있음
       migrationsRun: true, //  데이터베이스의 변경점을 소스 코드로 관리할 수 있음
     }),
