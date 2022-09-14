@@ -98,9 +98,6 @@
           passwordCheck: passwordCheckValue,
         };
 
-        // console.log('val');
-        // console.log(val);
-
         $.ajax({
           type: 'POST',
           url: `http://localhost:5000/signup`,
@@ -110,8 +107,8 @@
             window.location.reload();
           },
           error: function (err) {
-            console.log('실패!');
             console.log(err);
+            alert(err.responseJSON.message[0]);
           },
         });
       }

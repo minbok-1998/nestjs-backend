@@ -7,12 +7,8 @@ export class SignupController {
   constructor(private SignupService: SignupService) {}
 
   @Post()
-  async signup(@Body() signupData: SignUpDto): Promise<void> {
-    // console.log('controller');
-    // console.log(SignupData);
+  async signup(@Body() signupData: SignUpDto): Promise<SignUpDto> {
     const result = await this.SignupService.signUp(signupData);
-    console.log('cont-result');
-    console.log(result);
-    // return result;
+    return result;
   }
 }

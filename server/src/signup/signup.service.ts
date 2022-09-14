@@ -13,12 +13,8 @@ export class SignupService {
 
   // 회원 가입 요청 보내기
   async signUp(signupData: SignUpDto): Promise<SignUpDto> {
-    // console.log('service');
-    // console.log(SignupData);
     try {
       const result = await this.signupRepository.save(signupData);
-      console.log('result');
-      console.log(result);
       return result;
     } catch (err) {
       console.log('serveice err');
