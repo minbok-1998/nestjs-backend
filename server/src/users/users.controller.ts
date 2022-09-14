@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Render,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CUSTOMER } from './user.entity';
@@ -36,8 +37,10 @@ export class UsersController {
   async updateCustomer(
     @Param('id') id: number,
     @Body() val: any,
+    @Req() res,
   ): Promise<any> {
-    console.log(id);
+    console.log('res');
+    console.log(res);
     const result = await this.UsersService.updateCustomer(id, val);
     return result;
   }

@@ -10,6 +10,10 @@
     table {
       margin-left: 20px;
     }
+
+    .hi {
+      color: #000;
+    }
   </style>
   <body>
     <table class="table table-hover">
@@ -27,15 +31,33 @@
       <tbody>
         <%for(let i = 0; i < customer.length; i++) {%>
         <tr>
-          <th class="test" scope="row"><%= customer[i].id %></th>
+          <th scope="row"><%= customer[i].id %></th>
+          <td id="name">dsfd</td>
           <td><%= customer[i].name %></td>
           <td><%= customer[i].birthday %></td>
           <td><%= customer[i].gender %></td>
           <td><%= customer[i].job %></td>
 
           <td>
-            <button type="button" class="updateBtn btn btn-primary btn-sm">
+            <!-- <button
+              onclick="handleUserUpdate('<%= customer[i].id %>')"
+              type="button"
+              class="updateBtn btn btn-primary btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
               수정
+            </button> -->
+
+            <!-- Button trigger modal -->
+            <button
+              id="testBtn"
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Launch demo modal
             </button>
           </td>
           <td>
@@ -52,36 +74,63 @@
       </tbody>
     </table>
 
-    <script>
-      const val = {
-        name: '342',
-        birthday: 'dsfsf',
-        gender: 'dfsf',
-        job: 'dsfsd',
-      };
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <script>
       function handleUserUpdate(id, val) {
-        console.log(id);
-        console.log(val);
-        $.ajax({
-          type: 'PUT',
-          url: `http://localhost:5000/user/list/${id}`,
-          data: {
-            name: '342',
-            birthday: 'dsfsf',
-            gender: 'dfsf',
-            job: 'dsfsd',
-          },
-          success: function (data) {
-            console.log('success');
-            console.log(data);
-            // window.location.reload();
-          },
-          error: function (err) {
-            console.log('error');
-            console.log(err);
-          },
-        });
+        // console.log(id);
+        // console.log(val);
+        // $.ajax({
+        //   type: 'PUT',
+        //   url: `http://localhost:5000/user/list/${id}`,
+        //   data: {
+        //     name: '342',
+        //     birthday: 'dsfsf',
+        //     gender: 'dfsf',
+        //     job: 'dsfsd',
+        //   },
+        //   success: function (data) {
+        //     console.log('success');
+        //     console.log(data);
+        //     // window.location.reload();
+        //   },
+        //   error: function (err) {
+        //     console.log('error');
+        //     console.log(err);
+        //   },
+        // });
       }
 
       function handleUserDelete(id) {
@@ -97,6 +146,11 @@
           },
         });
       }
+
+      $('#testBtn').click(function (e) {
+        e.preventDefault();
+        $('#exampleModal').modal('show');
+      });
     </script>
   </body>
 </html>

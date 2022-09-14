@@ -14,7 +14,7 @@ export class UsersService {
   ) {}
 
   // 고객 정보 불러오기
-  async getAllUsers(): Promise<any> {
+  async getAllUsers(): Promise<CUSTOMER[]> {
     try {
       const result = await this.customerRepository
         .createQueryBuilder()
@@ -61,10 +61,10 @@ export class UsersService {
         .where(`id = ${id}`)
         .execute();
 
-      console.log('result');
-      console.log(result);
+      // console.log('result');
+      // console.log(result);
 
-      console.log(val);
+      // console.log(val);
 
       return result;
     } catch (error) {

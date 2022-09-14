@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(226, 226, 226);
+      }
+
+      form {
+        width: 20vw;
+        height: auto;
+      }
+
+      input {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body class="text-center">
+    <main class="form-signin">
+      <form>
+        <h1 class="h3 mb-3 fw-normal">회원가입</h1>
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">이름</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">이메일</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">비밀번호</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">비밀번호 확인</label>
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me" /> 회원정보 기억
+          </label>
+        </div>
+        <button
+          onclick="handleSignUp()"
+          class="w-100 btn btn-lg btn-primary"
+          type="submit"
+        >
+          회원가입
+        </button>
+        <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+      </form>
+    </main>
+
+    <script>
+      function handleSignUp() {
+        $.ajax({
+          type: 'POST',
+          url: `http://localhost:5000/signup`,
+          success: function (data) {
+            console.log(data);
+            // window.location.reload();
+          },
+          error: function (err) {
+            console.log(err);
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
