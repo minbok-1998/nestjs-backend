@@ -13,7 +13,4 @@ export class SIGNUP {
 
   @Column({ nullable: false })
   password: string;
-
-  @Column({ nullable: false })
-  passwordCheck: string;
 }

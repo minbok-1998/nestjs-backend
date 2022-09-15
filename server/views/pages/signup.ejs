@@ -48,13 +48,6 @@
           placeholder="비밀번호"
           onchange="onchangePassword()"
         />
-        <input
-          type="password"
-          class="form-control"
-          id="passwordCheck"
-          placeholder="비밀번호 확인"
-          onchange="onchangePasswordCheck()"
-        />
         <button
           onclick="handleSignUp()"
           id="addBtn"
@@ -70,7 +63,6 @@
       let nameValue;
       let emailValue;
       let passwordValue;
-      let passwordCheckValue;
 
       function onchangeName() {
         nameValue = $('#name').val();
@@ -84,16 +76,11 @@
         passwordValue = $('#password').val();
       }
 
-      function onchangePasswordCheck() {
-        passwordCheckValue = $('#passwordCheck').val();
-      }
-
       function handleSignUp() {
         const val = {
           name: nameValue,
           email: emailValue,
           password: passwordValue,
-          passwordCheck: passwordCheckValue,
         };
 
         $.ajax({
@@ -103,7 +90,7 @@
           success: function (data) {
             console.log(data);
             alert('회원가입 완료!');
-            window.location.reload();
+            // window.location.reload();
           },
           error: function (err) {
             if (err.responseJSON.statusCode === 400) {

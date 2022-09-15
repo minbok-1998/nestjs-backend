@@ -24,11 +24,6 @@ export class SignUpDto {
     message: '비밀번호는 대소문자, 숫자, 특수문자를 포함하여야합니다.',
   })
   password: string;
-
-  @IsNotEmpty()
-  @MinLength(4)
-  @MaxLength(20)
-  passwordCheck: string;
 }
 
 // regex pattern
