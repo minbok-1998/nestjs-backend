@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include ('../common/meta.ejs') %>
+    <title>Login</title>
+  </head>
+  <style>
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgb(226, 226, 226);
+    }
+
+    form {
+      width: 20vw;
+      height: auto;
+    }
+
+    input {
+      margin-bottom: 5px;
+    }
+  </style>
+  <body>
+    <main class="form-signin">
+      <div id="inputWrap" class="mb-3">
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="이메일"
+          onchange="onchangeEmail()"
+        />
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="비밀번호"
+          onchange="onchangePassword()"
+        />
+        <button
+          onclick="handleSignUp()"
+          id="addBtn"
+          type="button"
+          class="btn btn-warning"
+        >
+          로그인
+        </button>
+      </div>
+    </main>
+  </body>
+</html>
