@@ -24,10 +24,14 @@ export class SignupController {
   // 회원가입
   @Post('/signup')
   async signup(@Body() signupData: SignUpDto): Promise<any> {
-    // console.log('signupData');
-    // console.log(signupData);
-    const result = await this.SignupService.checkEmail(signupData);
-    // const result = await this.SignupService.signUp(signupData);
+    const result = await this.SignupService.signUp(signupData);
+    return result;
+  }
+
+  // 로그인
+  @Post('/login')
+  async login(@Body() loginData: LoginDto): Promise<any> {
+    const result = await this.SignupService.login(loginData);
     return result;
   }
 }

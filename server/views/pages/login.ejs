@@ -74,17 +74,15 @@
 
         $.ajax({
           type: 'POST',
-          url: `http://localhost:5000/signup`,
+          url: `http://localhost:5000/login`,
           data: val,
           success: function (data) {
             console.log(data);
-            alert('로그인 구현');
+            // alert('로그인 구현');
             // window.location.reload();
           },
           error: function (err) {
-            if (err.responseJSON.statusCode === 400) {
-              alert(err.responseJSON.message[0]);
-            }
+            alert(err.responseJSON.message);
           },
         });
       }
