@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Render } from '@nestjs/common';
 import { SignupService } from './signup.service';
 import { SignUpDto } from './dto/signup.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('/')
 export class SignupController {
@@ -20,9 +21,13 @@ export class SignupController {
     return {};
   }
 
+  // 회원가입
   @Post('/signup')
-  async signup(@Body() signupData: SignUpDto): Promise<SignUpDto> {
-    const result = await this.SignupService.signUp(signupData);
+  async signup(@Body() signupData: SignUpDto): Promise<any> {
+    // console.log('signupData');
+    // console.log(signupData);
+    const result = await this.SignupService.checkEmail(signupData);
+    // const result = await this.SignupService.signUp(signupData);
     return result;
   }
 }

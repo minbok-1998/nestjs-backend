@@ -7,18 +7,31 @@ import {
 } from 'class-validator';
 
 export class SignUpDto {
-  @MinLength(2)
-  @MaxLength(8)
+  @MinLength(2, {
+    message: '닉네임은 2글자 이상, 8글자 이하여야합니다.',
+  })
+  @MaxLength(8, {
+    message: '닉네임은 2글자 이상, 8글자 이하여야합니다.',
+  })
   @IsNotEmpty()
   name: string;
 
-  @IsEmail()
+  @IsEmail(
+    {},
+    {
+      message: '올바른 이메일 형식을 입력해주세요.',
+    },
+  )
   @IsNotEmpty()
   email: string;
 
   @IsNotEmpty()
-  @MinLength(4)
-  @MaxLength(20)
+  @MinLength(4, {
+    message: '비밀번호는 4글자 이상, 20글자 이하여야합니다.',
+  })
+  @MaxLength(20, {
+    message: '비밀번호는 4글자 이상, 20글자 이하여야합니다.',
+  })
   // 대문자, 소문자, 숫자, 특수문자로 이루어진 비밀번호
   @Matches(/(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: '비밀번호는 대소문자, 숫자, 특수문자를 포함하여야합니다.',

@@ -24,7 +24,7 @@
     }
   </style>
   <body>
-    <main class="form-signin">
+    <main class="form-login">
       <div id="inputWrap" class="mb-3">
         <input
           type="email"
@@ -50,5 +50,44 @@
         </button>
       </div>
     </main>
+    <script>
+      let emailValue;
+      let passwordValue;
+
+      function onchangeEmail() {
+        emailValue = $('#email').val();
+      }
+
+      function onchangePassword() {
+        passwordValue = $('#password').val();
+      }
+
+      function handleSignUp() {
+        const val = {
+          email: emailValue,
+          password: passwordValue,
+        };
+
+        // console.log(2222);
+        // console.log(val.email);
+        // console.log(val.password);
+
+        $.ajax({
+          type: 'POST',
+          url: `http://localhost:5000/signup`,
+          data: val,
+          success: function (data) {
+            console.log(data);
+            alert('로그인 구현');
+            // window.location.reload();
+          },
+          error: function (err) {
+            if (err.responseJSON.statusCode === 400) {
+              alert(err.responseJSON.message[0]);
+            }
+          },
+        });
+      }
+    </script>
   </body>
 </html>
